@@ -7,7 +7,7 @@ function! s:Sourcetalk()
 	let response = s:PostToST(title,content)
 	if response.status == 201
 		let body = webapi#json#decode(response.content)
-		let html_url = url."/".body['guid']."/".line(".")
+		let html_url = url."/".body['guid']
 		call s:OpenBrowser(html_url)
 		echomsg "Posted: ".html_url
 	else
@@ -18,7 +18,8 @@ endfunction
 function! s:PostToST(title,content)
 	let request_uri = 'http://app.sourcetalk.net/conferences.json'
 	let param = webapi#http#encodeURIComponent({"conference[file_name]":a:title,
-					\"conference[source]":a:content})
+					\"conference[source]":a:content,
+					\"conference[scroll_position]":line(".")})
 	let response = webapi#http#post(request_uri,param)
 	return response
 endfunction
