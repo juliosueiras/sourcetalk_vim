@@ -1,4 +1,4 @@
-command Sourcetalk call s:Sourcetalk()
+command SourcetalkStart call s:Sourcetalk()
 
 function! s:Sourcetalk()
 	let title = expand('%:t')
