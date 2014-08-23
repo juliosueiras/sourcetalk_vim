@@ -17,9 +17,9 @@ endfunction
 
 function! s:PostToST(title,content)
 	let request_uri = 'http://app.sourcetalk.net/conferences.json'
-	let param = webapi#http#encodeURIComponent({"conference[file_name]":a:title,
-					\"conference[source]":a:content,
-					\"conference[scroll_position]":line(".")})
+	let param = webapi#http#encodeURIComponent({"conference[source_files_attributes][0][name]":a:title,
+					\"conference[source_files_attributes][0][source]":a:content,
+					\"conference[source_files_attributes][0][scroll_position]":line(".")})
 	let response = webapi#http#post(request_uri,param)
 	return response
 endfunction
